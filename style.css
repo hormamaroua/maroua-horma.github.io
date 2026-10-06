@@ -1,0 +1,203 @@
+:root {
+  --fond: #e7e5e0;
+  --page: #ffffff;
+  --texte: #1c1c1c;
+  --discret: #5c5c5c;
+  --accent: #181d24;
+  --filet: #d6d6d6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --fond: #1b1b1b; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 32px 16px;
+  background: var(--fond);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  color: var(--texte);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cv {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 44px 52px 48px;
+  background: var(--page);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- En-tête ---------- */
+.photo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;   /* garde le visage dans le rond */
+  display: block;
+  margin: 0 auto 12px;
+  border: 3px solid var(--page);
+  cursor: zoom-in;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.photo.agrandie {
+  width: 170px;
+  height: 170px;
+  cursor: zoom-out;
+}
+
+.entete h2 {
+  margin: 0 0 1px;
+  font-size: 1.10rem;
+  font-weight: 1000;
+  letter-spacing: 0.01em;
+  font-family: "Crimson Text", Georgia, serif;
+  text-transform: none;
+  text-align: center;
+  border-bottom: none;
+}
+
+.contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--discret);
+}
+
+.contact img { width: 16px; height: 16px; flex: none; }
+.contact li { display: flex; align-items: center; gap: 6px; }
+
+.contact a {
+  color: inherit;          /* garde la couleur du texte autour */
+  text-decoration: none;   /* enlève le soulignement bleu par défaut */
+}
+.contact a:hover { text-decoration: underline; }
+
+/* ---------- Titres de section : tous identiques ---------- */
+h2 {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #000000;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+}
+
+h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+p, li, dd, dt { font-size: 0.72rem; }   /* taille à l'écran */
+p { margin: 2px 0 0; text-align: left; }
+
+sup { font-size: 0.65em; }
+
+.bloc { margin-bottom: 14px; }
+.bloc:last-child { margin-bottom: 0; }
+
+.date {
+  font-style: italic;
+  color: var(--discret);
+}
+
+/* ---------- Listes ---------- */
+ul { margin: 6px 0 0; padding-left: 18px; }
+li { margin-bottom: 5px; }
+li::marker { color: var(--accent); }
+
+.source {
+  margin: 10px 0 2px;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* ---------- Compétences : étiquette + valeur ---------- */
+.competences { margin: 0; }
+.competences dt { margin-top: 10px; font-weight: 700; }
+.competences dt:first-child { margin-top: 0; }
+.competences dd { margin: 1px 0 0; color: var(--discret); }
+
+/* ---------- Langues sur une ligne ---------- */
+.langues {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+}
+.langues li { margin: 0; }
+
+/* ---------- Deux colonnes ---------- */
+.colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  align-items: start;
+}
+
+/* ---------- Boutons (PDF, mode, langue) ---------- */
+#btn-pdf, #btn-mode, #btn-langue {
+  position: fixed;
+  z-index: 50;
+  padding: 8px 14px;
+  border: 1px solid #000;
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+#btn-pdf    { top: 16px; right: 16px; }
+#btn-mode   { top: 16px; left: 16px; }
+#btn-langue { top: 56px; left: 16px; }
+
+/* ---------- Mode sombre (écran seulement) ---------- */
+@media screen {
+  body.sombre { background: #151515; color: #eeeeee; }
+  body.sombre .cv { background: #1f1f1f; color: #eeeeee; box-shadow: none; }
+  body.sombre h2 { color: #ffffff; border-bottom-color: #ffffff; }
+  body.sombre h3 { color: #ffffff; }
+  body.sombre .date,
+  body.sombre em,
+  body.sombre dd,
+  body.sombre .contact { color: #bbbbbb; }
+  body.sombre .source { color: #9fc0ee; }
+  body.sombre .photo { border-color: #1f1f1f; box-shadow: 0 0 0 1px #555; }
+  body.sombre .contact img { filter: invert(1); }
+  body.sombre #btn-pdf,
+  body.sombre #btn-mode,
+  body.sombre #btn-langue { background: #222; color: #fff; border-color: #fff; }
+}
+
+/* ---------- Téléphone (écran seulement) ---------- */
+@media screen and (max-width: 720px) {
+  body { padding: 0; }
+  .cv { padding: 28px 20px; box-shadow: none; }
+  .colonnes { grid-template-columns: 1fr; }
+}
+
+/* ---------- Impression / PDF : ce bloc doit rester le DERNIER ---------- */
+@page { size: A4; margin: 0; }
+@media print {
+  body { padding: 0; background: #fff; }
+  .cv { max-width: none; box-shadow: none; padding: 12mm 14mm; }
+  .bloc, li { break-inside: avoid; }
+  #btn-pdf, #btn-mode, #btn-langue { display: none; }
+  .photo.agrandie { width: 112px; height: 112px; }
+  p, li, dd, dt { font-size: 0.57rem; }   /* taille dans le PDF (comme avant) */
+}
